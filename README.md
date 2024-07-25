@@ -168,9 +168,11 @@ See [CONTRIBUTING.md](https://github.com/ansible-collections/amazon.aws/blob/mai
 
 ## Support
 
-You can also join us on:
+For the latest supported versions, refer to the release notes below.
 
-- Libera.Chat IRC - the ``#ansible-aws`` [irc.libera.chat](https://libera.chat/) channel
+If you encounter issues or have questions, you can submit a support request through the following channels:
+ - GitHub Issues: Report bugs, request features, or ask questions by opening an issue in the [GitHub repository](https://github.com/redhat-cop/cloud.aws_ops/).
+ - Ansible Community: Engage with the Ansible community on the Ansible Project Mailing List or [Ansible Forum](https://forum.ansible.com/).
 
 ## Release notes
 
