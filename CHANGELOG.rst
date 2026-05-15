@@ -7,6 +7,29 @@ amazon.aws Release Notes
 v11.3.0
 =======
 
+This minor release adds new features and improvements to the ``autoscaling_group``, ``elb_application_lb``, ``elb_application_lb_info``, ``elb_classic_lb``, ``event_source_aws_cloudtrail``, ``kms_key``, ``s3_bucket``, ``s3_object_info`` module(s).
+
+Minor Changes
+-------------
+
+- Various modules and utilities - migrated from deprecated ``ansible.module_utils._text`` to ``ansible.module_utils.common.text.converters`` (https://github.com/ansible-collections/amazon.aws/pull/2860).
+- amazon.aws.cloudformation - Fixed an issue where creating a changeset in check mode would fail if the stack is not in a ready state (e.g., UPDATE_IN_PROGRESS). The module now waits for the stack to be in a ready state (UPDATE_COMPLETE) before creating the changeset (https://github.com/ansible-collections/amazon.aws/pull/1910)
+- elb_application_lb_info - Fixed return value documentation to correctly reflect actual types and added missing fields (https://github.com/ansible-collections/amazon.aws/issues/2939).
+- extensions/eda/plugins/event_source/aws_sqs_queue.py - Added optional support for feedback so that the event can be removed from the SQS Queue on receipt of acknowledgement from ansible-rulebook.
+- module_utils/errors - Add support for f-string style parameter interpolation in error handler descriptions to provide more detailed error messages (https://github.com/ansible-collections/amazon.aws/pull/2944).
+- s3_bucket - Added O(account_regional) parameter to support creating buckets in the account-regional namespace. Requires at least botocore version 1.42.67 (https://github.com/ansible-collections/amazon.aws/pull/2960).
+- s3_bucket - Added support for managing bucket logging configuration (https://github.com/ansible-collections/amazon.aws/pull/2855).
+
+Bugfixes
+--------
+
+- elb_application_lb - Listener rules are now returned sorted by priority with the default rule appearing last (https://github.com/ansible-collections/amazon.aws/issues/2939).
+- elb_application_lb_info - Listener rules are now returned sorted by priority with the default rule appearing last (https://github.com/ansible-collections/amazon.aws/issues/2939).
+
+v10.3.1
+>>>>>>> c0bc9f945 (Release v11.3.0 (#2969) (#2976))
+=======
+
 Release Summary
 ---------------
 
@@ -717,15 +740,9 @@ Minor Changes
 Bugfixes
 --------
 
-- ec2_vpc_route_table - Fix idempotent issues when updating routes to use VPC Endpoint Gateways (https://github.com/ansible-collections/amazon.aws/issues/1976).
-- s3_bucket - Fix ``accelerate_enabled`` parameter not being applied when creating a bucket (https://github.com/ansible-collections/amazon.aws/issues/2037).
-
-New Modules
------------
-
-- aws_az_info - Gather information about availability zones in AWS
-- rds_instance_param_group - manage RDS parameter groups
-- rds_instance_param_group_info - describes the properties of specific RDS parameter group.
+- cloudwatchevent_rule - Fix to avoid adding quotes to JSON input for provided input_template (https://github.com/ansible-collections/amazon.aws/pull/1883).
+- lookup/secretsmanager_secret - fix the issue when the nested secret is missing and on_missing is set to warn, the lookup was raising an error instead of a warning message (https://github.com/ansible-collections/amazon.aws/issues/1781).
+- module_utils/elbv2 - Fix issue when creating or modifying Load balancer rule type authenticate-oidc using ``ClientSecret`` parameter and ``UseExistingClientSecret=true`` (https://github.com/ansible-collections/amazon.aws/issues/1877).
 
 v7.3.0
 =======
